@@ -1,0 +1,14 @@
+<%= form_for @article do |f| %>
+  <%= f.label :url, "URL"  %>
+  <%=f.text_field :url%>
+  <%= f.label :category, "category"  %>
+
+
+<%= f.select(:category_id) do %>
+  <% @splash.each do |c| -%>
+    <%= content_tag(:option, c.first, value: c.last) %>
+  <% end %>
+<% end %>
+
+  <%=f.submit%>
+<% end %>
