@@ -22,9 +22,9 @@
 
 
               <i class="fa fa-facebook"></i>
-
+            <%=link_to article_delete_path(article),  method: :delete,  data: { confirm: "Are you sure?" } do%>
               <i class="fa fa-trash-o"></i>
-
+            <% end %>
           </div>
         </div>
       </div>

@@ -1,14 +1,10 @@
 class CategoriesController < ApplicationController
-before_action :set_category, only: [:show, :update]
+before_action :set_category, only: [:show, :edit, :update, :delete]
  before_action :set_splash, only: [:show, :new, :create]
   before_action :set_article, only: [:show, :new]
 COLORS = ["green", "orange", "yellow", "blue", "purple", "red"]
 
-  def index
-    @categories = Category.all
-    @articles = Article.all
 
-  end
 
   def show
     @categories = Category.all
@@ -20,7 +16,7 @@ COLORS = ["green", "orange", "yellow", "blue", "purple", "red"]
   end
 
   def create
-       @category = Category.new(category_params)
+    @category = Category.new(category_params)
     if @category.save
       id = @category.id
        n = COLORS.count
@@ -28,15 +24,13 @@ COLORS = ["green", "orange", "yellow", "blue", "purple", "red"]
        y = id - n * x
        @category.color = COLORS[y]
        @category.save
-      redirect_to categories_path
+      redirect_to root_path
     else
       render :new
     end
   end
 
   def edit
-    @category = Category.find(params[:format])
-
   end
 
   def update
@@ -50,7 +44,7 @@ COLORS = ["green", "orange", "yellow", "blue", "purple", "red"]
   def destroy
     @category = Category.find(params[:format])
     @category.destroy
-    redirect_to categories_path
+    redirect_to root_path
   end
 
   private

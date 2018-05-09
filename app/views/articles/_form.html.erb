@@ -12,3 +12,10 @@
 
   <%=f.submit%>
 <% end %>
+
+<p></p>
+<%= form_for @category do |f| %>
+  <%= f.label :name, "Category name"  %>
+  <%=f.text_field :name%>
+  <%=f.submit%>
+<% end %>

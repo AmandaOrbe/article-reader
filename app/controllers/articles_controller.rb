@@ -51,6 +51,9 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @article = Article.find(params[:format])
+    @article.destroy
+    redirect_to root_path
   end
 
 private
@@ -66,6 +69,7 @@ private
   end
 
   def set_splash
+    @category = Category.new
     @categories = Category.all
     @splash = []
     @categories.each do |category|
