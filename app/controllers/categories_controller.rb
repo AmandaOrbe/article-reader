@@ -1,13 +1,13 @@
 class CategoriesController < ApplicationController
 before_action :set_category, only: [:show, :edit, :update, :delete]
- before_action :set_splash, only: [:show, :new, :create]
-  before_action :set_article, only: [:show, :new]
+ before_action :set_splash, only: [:show, :new, :create, :new_article]
+  before_action :set_article, only: [:show, :new, :new_article]
 COLORS = ["green", "orange", "yellow", "blue", "purple", "red"]
 
 
 
   def show
-    @categories = Category.all
+    @categories = current_user.categories.order(created_at: :desc)
     @articles = @category.articles
   end
 
@@ -15,8 +15,12 @@ COLORS = ["green", "orange", "yellow", "blue", "purple", "red"]
     @category = Category.new
   end
 
+  def new_article
+
+  end
   def create
     @category = Category.new(category_params)
+    @category.user_id = current_user.id
     if @category.save
       id = @category.id
        n = COLORS.count
@@ -57,7 +61,7 @@ COLORS = ["green", "orange", "yellow", "blue", "purple", "red"]
     params.require(:category).permit(:name)
   end
   def set_splash
-    @categories = Category.all
+   @categories = current_user.categories.order(created_at: :desc)
     @splash = []
     @categories.each do |category|
       @splash << [category.name, category.id]

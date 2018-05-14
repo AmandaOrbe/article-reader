@@ -1,6 +1,7 @@
-<p>hello from list</p>
+
 <%@categories.each do |category|%>
-  <h4><%= link_to category.name, category_path(category), class: category.color %></h4>
+
+  <%= link_to category.name, category_path(category), class: "#{category.color} btn"  %>
 
 
 <% end %>
